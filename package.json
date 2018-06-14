@@ -4,6 +4,7 @@
   "description": "Experiment",
   "main": "index.js",
   "scripts": {
+    "format": "prettier 'src/**/*' --write",
     "test": "mocha -r ts-node/register src/**/*.spec.ts"
   },
   "repository": {
@@ -24,6 +25,7 @@
     "@types/mocha": "^5.2.2",
     "chai": "^4.1.2",
     "mocha": "^5.2.0",
+    "prettier": "^1.13.5",
     "ts-node": "^6.1.1",
     "typescript": "^2.9.2"
   }
