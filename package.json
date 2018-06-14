@@ -1,0 +1,30 @@
+{
+  "name": "next",
+  "version": "0.0.1",
+  "description": "Experiment",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -r ts-node/register src/**/*.spec.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackforplay/next.git"
+  },
+  "keywords": [
+    "hackforplay"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hackforplay/next/issues"
+  },
+  "homepage": "https://github.com/hackforplay/next#readme",
+  "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/mocha": "^5.2.2",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "ts-node": "^6.1.1",
+    "typescript": "^2.9.2"
+  }
+}
