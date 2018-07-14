@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "format": "prettier 'src/**/*' --write",
-    "test": "mocha -r ts-node/register src/**/*.spec.ts"
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -21,12 +21,26 @@
   },
   "homepage": "https://github.com/hackforplay/next#readme",
   "devDependencies": {
-    "@types/chai": "^4.1.4",
-    "@types/mocha": "^5.2.2",
-    "chai": "^4.1.2",
-    "mocha": "^5.2.0",
+    "@types/fs-extra": "^5.0.4",
+    "@types/jsdom": "^11.0.6",
+    "ava": "1.0.0-beta.6",
+    "canvas-prebuilt": "^1.6.5-prerelease.1",
+    "fs-extra": "^6.0.1",
+    "jsdom": "^11.11.0",
     "prettier": "^1.13.5",
     "ts-node": "^6.1.1",
     "typescript": "^2.9.2"
+  },
+  "ava": {
+    "files": [
+      "src/**/*.spec.ts"
+    ],
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
   }
 }

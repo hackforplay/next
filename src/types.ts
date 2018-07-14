@@ -22,9 +22,10 @@ export type Square = {
     author: TileAuthor;
   };
 };
+export type SceneMap = {
+  tables: Table[];
+  squares: Square[];
+};
 export type Scene = {
-  map: {
-    tables: Table[];
-    squares: Square[];
-  };
+  map: SceneMap;
 };
