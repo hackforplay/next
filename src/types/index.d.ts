@@ -1,3 +1,5 @@
+import './canvas-prebuilt';
+
 export type Index = number;
 export type Table = Index[][];
 export type TileSize = [number, number];
@@ -26,6 +28,15 @@ export type SceneMap = {
   tables: Table[];
   squares: Square[];
 };
+export type ImageAsset = {
+  index: Index;
+  isLoading: boolean;
+  image: HTMLImageElement;
+};
+export type SceneAssets = {
+  images: ImageAsset[];
+};
 export type Scene = {
   map: SceneMap;
+  assets: SceneAssets;
 };
