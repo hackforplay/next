@@ -12,6 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/hackforplay/next.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "hackforplay"
   ],
