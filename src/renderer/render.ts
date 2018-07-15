@@ -11,20 +11,26 @@ export default function render(
   container: HTMLElement,
   state = {}
 ) {
-  const document = container.ownerDocument;
-  const canvas = getCanvas(container);
+  const {
+    map: { tables },
+    assets: { images },
+    screen
+  } = scene;
+
+  const canvas = getCanvas(container, screen);
   const ctx = canvas.getContext('2d');
 
-  // 描画
-  const {
-    map: { tables, squares }
-  } = scene;
 }
 
-function getCanvas(node: HTMLElement): HTMLCanvasElement {
+function getCanvas(
+  node: HTMLElement,
+  screen: t.SceneScreen
+): HTMLCanvasElement {
   const existNode = node.querySelector('canvas');
   if (existNode) return existNode;
   const canvas = node.ownerDocument.createElement('canvas');
+  canvas.width = screen.width;
+  canvas.height = screen.height;
   node.appendChild(canvas);
   return canvas;
 }

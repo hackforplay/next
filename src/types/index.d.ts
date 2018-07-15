@@ -36,7 +36,12 @@ export type ImageAsset = {
 export type SceneAssets = {
   images: ImageAsset[];
 };
+export type SceneScreen = {
+  width: number;
+  height: number;
+};
 export type Scene = {
   map: SceneMap;
   assets: SceneAssets;
+  screen: SceneScreen;
 };

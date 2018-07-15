@@ -16,7 +16,8 @@ function dataURL(fileName: string) {
 
 export default function createScene(): t.Scene {
   return {
-    map: createMap()
+    map: createMap(),
+    screen: createScreen()
   };
 }
 
@@ -114,5 +115,12 @@ export function createMap(): t.SceneMap {
         }
       }
     ]
+  };
+}
+
+export function createScreen(): t.SceneScreen {
+  return {
+    width: 320,
+    height: 192
   };
 }
