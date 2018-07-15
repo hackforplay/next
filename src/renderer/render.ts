@@ -9,11 +9,7 @@ export const size = 32;
  * @param container Render target element
  * @param state Mutable state object
  */
-export default function render(
-  scene: t.Scene,
-  container: HTMLElement,
-  state = {}
-) {
+export function render(scene: t.Scene, container: HTMLElement, state = {}) {
   const {
     map: { tables },
     assets: { images },

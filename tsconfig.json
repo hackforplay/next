@@ -8,7 +8,9 @@
     "preserveConstEnums": true,
     "outDir": "./lib",
     "sourceMap": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "declaration": true,
+    "declarationDir": "./lib"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

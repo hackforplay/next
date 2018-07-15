@@ -3,8 +3,8 @@ import * as path from 'path';
 import * as fs from 'fs-extra';
 import { Image } from 'canvas-prebuilt';
 import * as jsdom from 'jsdom';
-import render from './render';
-import { loadImages } from '../preloader/';
+import { render } from '.';
+import { loadImages } from '../preloader';
 import createScene from '../factories/createScene';
 
 let window: jsdom.DOMWindow;
