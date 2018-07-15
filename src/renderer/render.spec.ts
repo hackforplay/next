@@ -1,13 +1,18 @@
 import test from 'ava';
 import * as path from 'path';
 import * as fs from 'fs-extra';
+import { Image } from 'canvas-prebuilt';
 import * as jsdom from 'jsdom';
 import render from './render';
+import { loadImages } from '../preloader/';
 import createScene from '../factories/createScene';
 
 let window: jsdom.DOMWindow;
 let div: any;
 const tmpDir = path.resolve(__dirname, '../../tmp');
+
+// export Image constractor from node-canvas project
+global.Image = Image;
 
 test.before('generate DOM', t => {
   window = new jsdom.JSDOM(`<!DOCTYPE html><div></div>`).window;
@@ -19,10 +24,23 @@ test.before('make tmp directory', async t => {
   await fs.mkdirp(tmpDir);
 });
 
-test('render', async t => {
+test('no loading render', t => {
   if (!(div instanceof window.HTMLDivElement)) return;
 
   const scene = createScene();
+  t.throws(
+    () => {
+      render(scene, div);
+    },
+    'assets.images (index=100) has not found',
+    'アセットのロードが完了していなければ例外を投げます'
+  );
+});
+
+test('preload and render', async t => {
+  const scene = createScene();
+  await loadImages(scene);
+
   const copy = { ...scene };
   const state = {};
   render(scene, div, state);
@@ -33,5 +51,5 @@ test('render', async t => {
 
   const dataURL = canvas.toDataURL();
   const base64 = dataURL.split(',')[1];
-  await fs.writeFile(tmpDir + '/rendered.png', dataURL, 'base64');
+  await fs.writeFile(tmpDir + '/rendered.png', base64, 'base64');
 });

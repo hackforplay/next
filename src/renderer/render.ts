@@ -1,4 +1,7 @@
 import * as t from '../types';
+import NotLoadedError from '../errors/not-loaded';
+
+export const size = 32;
 
 /**
  *
@@ -20,6 +23,24 @@ export default function render(
   const canvas = getCanvas(container, screen);
   const ctx = canvas.getContext('2d');
 
+  const indexPairAssets: t.ImageAsset[] = [];
+  for (const asset of images) {
+    indexPairAssets[asset.index] = asset;
+  }
+
+  // とりあえず全部同じように描画
+  for (const table of [...tables].reverse()) {
+    for (const [y, row] of table.entries()) {
+      for (const [x, index] of row.entries()) {
+        if (index < 0) continue; // nope
+        const assets = indexPairAssets[index];
+        if (!assets || assets.isLoading) {
+          throw new NotLoadedError(assets, index);
+        }
+        ctx.drawImage(assets.image, x * size, y * size);
+      }
+    }
+  }
 }
 
 function getCanvas(
