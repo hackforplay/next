@@ -5,8 +5,9 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "format": "prettier 'src/**/*' --write",
-    "test": "ava"
+    "format": "prettier 'src/**/*.ts' --write",
+    "test": "ava",
+    "prepublish": "prettier --list-different 'src/**/*.ts' && tsc"
   },
   "repository": {
     "type": "git",
