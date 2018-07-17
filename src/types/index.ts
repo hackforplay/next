@@ -1,4 +1,5 @@
 import './canvas-prebuilt';
+import { Placement } from './placement';
 
 export type Index = number;
 export type Table = Index[][];
@@ -8,19 +9,16 @@ export type TileImage = {
   type: TileImageType;
   src: string;
 };
-export type TileOrder = 'Inherit' | 'Below' | 'SortY' | 'Above';
-export type TileCollider = boolean[];
 export type TileAuthor = {
   name: string;
   url?: string;
 };
 export type Square = {
   index: Index;
+  placement: Placement;
   tile: {
     size: TileSize;
     image: TileImage;
-    order: TileOrder;
-    collider: TileCollider;
     author: TileAuthor;
   };
 };

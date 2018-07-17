@@ -53,14 +53,15 @@ export function createMap(): t.SceneMap {
     squares: [
       {
         index: 100,
+        placement: {
+          type: 'Ground'
+        },
         tile: {
           size: [32, 32],
           image: {
             type: 'data-url',
             src: pipoya.grass
           },
-          order: 'Below',
-          collider: [false, false, false, false],
           author: {
             name: 'ぴぽや',
             url: 'http://blog.pipoya.net/'
@@ -69,14 +70,15 @@ export function createMap(): t.SceneMap {
       },
       {
         index: 101,
+        placement: {
+          type: 'Barrier'
+        },
         tile: {
           size: [32, 32],
           image: {
             type: 'data-url',
             src: pipoya.rock
           },
-          order: 'SortY',
-          collider: [true, true, true, true],
           author: {
             name: 'ぴぽや',
             url: 'http://blog.pipoya.net/'
@@ -85,14 +87,15 @@ export function createMap(): t.SceneMap {
       },
       {
         index: 102,
+        placement: {
+          type: 'Sky'
+        },
         tile: {
           size: [32, 32],
           image: {
             type: 'data-url',
             src: pipoya.roof
           },
-          order: 'Above',
-          collider: [],
           author: {
             name: 'ぴぽや',
             url: 'http://blog.pipoya.net/'
@@ -101,14 +104,15 @@ export function createMap(): t.SceneMap {
       },
       {
         index: 103,
+        placement: {
+          type: 'Rug'
+        },
         tile: {
           size: [32, 32],
           image: {
             type: 'data-url',
             src: pipoya.flower
           },
-          order: 'Inherit',
-          collider: [], // Inherit
           author: {
             name: 'ぴぽや',
             url: 'http://blog.pipoya.net/'
