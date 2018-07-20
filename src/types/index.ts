@@ -1,5 +1,7 @@
 import './canvas-prebuilt';
-import { Placement } from './placement';
+import * as Placement from './placement';
+
+export type Placement = Placement.Placement;
 
 export type Index = number;
 export type Table = Index[][];
@@ -15,7 +17,7 @@ export type TileAuthor = {
 };
 export type Square = {
   index: Index;
-  placement: Placement;
+  placement: Placement.Placement;
   tile: {
     size: TileSize;
     image: TileImage;
