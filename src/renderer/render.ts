@@ -25,6 +25,7 @@ export function render(scene: t.Scene, container: HTMLElement, state = {}) {
   }
 
   // とりあえず全部同じように描画
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   for (const table of [...tables].reverse()) {
     for (const [y, row] of table.entries()) {
       for (const [x, index] of row.entries()) {
