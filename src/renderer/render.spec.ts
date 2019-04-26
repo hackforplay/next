@@ -38,7 +38,7 @@ test('no loading render', t => {
 });
 
 test('preload and render', async t => {
-  const scene = createScene();
+  const scene = createScene(true);
   await loadImages(scene);
 
   const copy = { ...scene };

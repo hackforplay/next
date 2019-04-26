@@ -14,8 +14,9 @@ function dataURL(fileName: string) {
   return 'data:image/png;base64,' + base64;
 }
 
-export default function createScene(): t.Scene {
+export default function createScene(debug = false): t.Scene {
   return {
+    debug,
     map: createMap(),
     assets: emptyAssets(),
     screen: createScreen()

@@ -40,6 +40,7 @@ export type SceneScreen = {
   height: number;
 };
 export type Scene = {
+  debug: boolean;
   map: SceneMap;
   assets: SceneAssets;
   screen: SceneScreen;
