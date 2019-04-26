@@ -1,4 +1,3 @@
-import './canvas-prebuilt';
 import * as Placement from './placement';
 
 export type Placement = Placement.Placement;

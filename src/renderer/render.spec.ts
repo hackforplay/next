@@ -1,7 +1,7 @@
 import test from 'ava';
 import * as path from 'path';
 import * as fs from 'fs-extra';
-import { Image } from 'canvas-prebuilt';
+import { Image } from 'canvas';
 import * as jsdom from 'jsdom';
 import { render } from '.';
 import { loadImages } from '../preloader';
@@ -12,7 +12,7 @@ let div: any;
 const tmpDir = path.resolve(__dirname, '../../tmp');
 
 // export Image constractor from node-canvas project
-global.Image = Image;
+(global as any).Image = Image as any;
 
 test.before('generate DOM', t => {
   window = new jsdom.JSDOM(`<!DOCTYPE html><div></div>`).window;
