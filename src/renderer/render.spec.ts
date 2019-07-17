@@ -4,7 +4,6 @@ import * as fs from 'fs-extra';
 import { Image } from 'canvas';
 import * as jsdom from 'jsdom';
 import { render } from '.';
-import { loadImages } from '../preloader';
 import createScene from '../factories/createScene';
 
 let window: jsdom.DOMWindow;
@@ -24,22 +23,8 @@ test.before('make tmp directory', async t => {
   await fs.mkdirp(tmpDir);
 });
 
-test('no loading render', t => {
-  if (!(div instanceof window.HTMLDivElement)) return;
-
-  const scene = createScene();
-  t.throws(
-    () => {
-      render(scene, div);
-    },
-    'assets.images (index=100) has not found',
-    'アセットのロードが完了していなければ例外を投げます'
-  );
-});
-
 test('preload and render', async t => {
   const scene = createScene(true);
-  await loadImages(scene);
 
   const copy = { ...scene };
   const state = {};

@@ -18,7 +18,6 @@ export default function createScene(debug = false): t.Scene {
   return {
     debug,
     map: createMap(),
-    assets: emptyAssets(),
     screen: createScreen()
   };
 }
@@ -121,12 +120,6 @@ export function createMap(): t.SceneMap {
         }
       }
     ]
-  };
-}
-
-export function emptyAssets(): t.SceneAssets {
-  return {
-    images: []
   };
 }
 
