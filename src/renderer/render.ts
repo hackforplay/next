@@ -1,5 +1,5 @@
+import { loadImage } from '../preloader/load-image';
 import * as t from '../types';
-import NotLoadedError from '../errors/not-loaded';
 
 export const size = 32;
 
@@ -13,17 +13,12 @@ export function render(scene: t.Scene, container: HTMLElement, state = {}) {
   const {
     debug,
     map: { tables, squares },
-    assets: { images },
     screen
   } = scene;
 
   const canvas = getCanvas(container, screen);
   const ctx = canvas.getContext('2d');
-
-  const indexPairAssets: t.ImageAsset[] = [];
-  for (const asset of images) {
-    indexPairAssets[asset.index] = asset;
-  }
+  if (!ctx) return;
 
   // { [key: number]: Square } にリマップ
   const indexSquareMap: { [key: number]: t.Square } = {};
@@ -37,12 +32,9 @@ export function render(scene: t.Scene, container: HTMLElement, state = {}) {
     for (const [y, row] of table.entries()) {
       for (const [x, index] of row.entries()) {
         if (index < 0) continue; // nope
-        const assets = indexPairAssets[index];
-        if (!assets || assets.isLoading) {
-          throw new NotLoadedError(assets, index);
-        }
-
-        const { placement } = indexSquareMap[index];
+        const { placement, tile } = indexSquareMap[index];
+        const image = loadImage(index, tile.image.src);
+        if (!image) continue;
         const collider = getCollider(placement);
 
         const edge = debug ? 1 : 0; // debug mode ではタイルのエッジに白または赤の border を描画する
@@ -56,7 +48,7 @@ export function render(scene: t.Scene, container: HTMLElement, state = {}) {
             ctx.strokeRect(left, top, len, len);
           }
         }
-        ctx.drawImage(assets.image, edge, edge, len, len, left, top, len, len);
+        ctx.drawImage(image, edge, edge, len, len, left, top, len, len);
       }
     }
   }
@@ -68,6 +60,9 @@ function getCanvas(
 ): HTMLCanvasElement {
   const existNode = node.querySelector('canvas');
   if (existNode) return existNode;
+  if (!node.ownerDocument) {
+    throw new Error('ownerDocument not set');
+  }
   const canvas = node.ownerDocument.createElement('canvas');
   canvas.width = screen.width;
   canvas.height = screen.height;

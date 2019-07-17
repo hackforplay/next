@@ -27,14 +27,6 @@ export type SceneMap = {
   tables: Table[];
   squares: Square[];
 };
-export type ImageAsset = {
-  index: Index;
-  isLoading: boolean;
-  image: HTMLImageElement;
-};
-export type SceneAssets = {
-  images: ImageAsset[];
-};
 export type SceneScreen = {
   width: number;
   height: number;
@@ -42,6 +34,5 @@ export type SceneScreen = {
 export type Scene = {
   debug: boolean;
   map: SceneMap;
-  assets: SceneAssets;
   screen: SceneScreen;
 };
