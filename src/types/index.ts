@@ -5,7 +5,7 @@ export type Placement = Placement.Placement;
 export type Index = number;
 export type Table = Index[][];
 export type TileSize = number[];
-export type TileImageType = 'data-url';
+export type TileImageType = 'data-url' | 'url';
 export type TileImage = {
   type: TileImageType;
   src: string;
