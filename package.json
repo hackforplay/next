@@ -53,5 +53,8 @@
   "directories": {
     "lib": "lib"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@types/debounce": "^1.2.0",
+    "debounce": "^1.2.0"
+  }
 }
