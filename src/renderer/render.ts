@@ -1,16 +1,14 @@
-import { loadImage } from '../preloader/load-image';
+import { Preloader } from '../preloader';
 import * as t from '../types';
 import { getCanvas } from './get-canvas';
 
 export const size = 32;
 
-/**
- *
- * @param scene Scene object
- * @param container Render target element
- * @param state Mutable state object
- */
-export function render(scene: t.Scene, container: HTMLElement, state = {}) {
+export function render(
+  scene: t.Scene,
+  container: HTMLElement,
+  preloader?: Preloader
+) {
   const {
     debug,
     map: { tables, squares },
@@ -22,7 +20,7 @@ export function render(scene: t.Scene, container: HTMLElement, state = {}) {
   if (!ctx) return;
 
   // { [key: number]: Square } にリマップ
-  const indexSquareMap: { [key: number]: t.Square } = {};
+  const indexSquareMap: { [key: number]: t.Square | undefined } = {};
   for (const square of squares) {
     indexSquareMap[square.index] = square;
   }
@@ -33,8 +31,10 @@ export function render(scene: t.Scene, container: HTMLElement, state = {}) {
     for (const [y, row] of table.entries()) {
       for (const [x, index] of row.entries()) {
         if (index < 0) continue; // nope
-        const { placement, tile } = indexSquareMap[index];
-        const image = loadImage(index, tile.image.src);
+        const square = indexSquareMap[index];
+        if (!square) continue; // not found
+        const { placement } = square;
+        const image = preloader && preloader.getImage(index);
         if (!image) continue;
         const collider = getCollider(placement);
 
