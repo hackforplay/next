@@ -54,7 +54,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "@types/debounce": "^1.2.0",
-    "debounce": "^1.2.0"
+    "@types/lodash-es": "^4.17.3",
+    "lodash-es": "^4.17.14"
   }
 }

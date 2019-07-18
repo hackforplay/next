@@ -1,4 +1,4 @@
-import { debounce } from 'debounce';
+import { debounce } from 'lodash-es';
 import { Preloader } from '../preloader/preloader';
 import { Scene, SceneScreen, Square } from '../types';
 import { render } from './render';
@@ -41,7 +41,7 @@ export class CanvasRenderer {
     }
 
     if (!this.preloader.loading) {
-      this.postRender.clear();
+      this.postRender.cancel();
       this.render(scene);
       return Promise.resolve();
     }
