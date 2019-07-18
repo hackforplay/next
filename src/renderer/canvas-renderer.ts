@@ -18,9 +18,7 @@ export class CanvasRenderer {
 
   update(scene: Scene): Promise<void> {
     const {
-      debug,
-      map: { tables, squares },
-      screen
+      map: { tables, squares }
     } = scene;
 
     // { [key: number]: Square } にリマップ
