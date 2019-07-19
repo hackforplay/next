@@ -14,6 +14,7 @@ export class Preloader {
 
     this.store[index] = null;
     const img = new Image();
+    img.crossOrigin = 'anonymous';
     img.onload = () => {
       this.store[index] = img;
       this.count--;
