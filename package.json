@@ -59,6 +59,7 @@
   },
   "dependencies": {
     "@types/lodash-es": "^4.17.3",
+    "@types/node": "^12.6.8",
     "lodash-es": "^4.17.14"
   }
 }
