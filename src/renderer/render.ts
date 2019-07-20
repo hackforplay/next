@@ -11,7 +11,7 @@ export function render(
 ) {
   const {
     debug,
-    map: { tables, squares },
+    map: { base, tables, squares },
     screen
   } = scene;
 
@@ -26,7 +26,14 @@ export function render(
   }
 
   // とりあえず全部同じように描画
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const baseImage = preloader && preloader.getImage(base);
+  const pattern = baseImage && ctx.createPattern(baseImage, 'repeat');
+  if (pattern) {
+    ctx.fillStyle = pattern;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  } else {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
   for (const table of [...tables].reverse()) {
     for (const [y, row] of table.entries()) {
       for (const [x, index] of row.entries()) {

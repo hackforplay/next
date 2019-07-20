@@ -24,6 +24,7 @@ export type Square = {
   };
 };
 export type SceneMap = {
+  base: number;
   tables: Table[];
   squares: Square[];
 };
