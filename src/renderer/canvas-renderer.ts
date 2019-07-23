@@ -18,13 +18,18 @@ export class CanvasRenderer {
 
   update(scene: Scene): Promise<void> {
     const {
-      map: { tables, squares }
+      map: { base, tables, squares }
     } = scene;
 
     // { [key: number]: Square } にリマップ
     const indexSquareMap: { [key: number]: Square | undefined } = {};
     for (const square of squares) {
       indexSquareMap[square.index] = square;
+    }
+
+    const baseSquare = indexSquareMap[base];
+    if (baseSquare) {
+      this.preloader.loadImage(base, baseSquare.tile.image.src);
     }
 
     for (const table of tables) {
