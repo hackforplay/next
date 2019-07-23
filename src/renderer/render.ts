@@ -25,6 +25,10 @@ export function render(
     indexSquareMap[square.index] = square;
   }
 
+  const front = tables && tables[0];
+  const row = front && front.length;
+  const column = front && front[0] && front[0].length;
+
   // とりあえず全部同じように描画
   const baseImage = preloader && preloader.getImage(base);
   const pattern = baseImage && ctx.createPattern(baseImage, 'repeat');
@@ -33,6 +37,17 @@ export function render(
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   } else {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  if (debug) {
+    ctx.fillStyle = 'white';
+    // verticals
+    for (let y = 0; y < row; y++) {
+      ctx.fillRect(0, y * size - 1, canvas.width, 2);
+    }
+    // horizontals
+    for (let x = 0; x < column; x++) {
+      ctx.fillRect(x * size - 1, 0, 2, canvas.height);
+    }
   }
   for (const table of [...tables].reverse()) {
     for (const [y, row] of table.entries()) {
@@ -49,12 +64,10 @@ export function render(
         const left = x * size + edge;
         const top = y * size + edge;
         const len = size - 2 * edge;
-        if (debug) {
-          if (collider === 1) {
-            ctx.strokeStyle = 'red';
-            ctx.lineWidth = edge * 2;
-            ctx.strokeRect(left, top, len, len);
-          }
+        if (debug && collider > -1) {
+          ctx.strokeStyle = collider === 1 ? 'red' : 'white';
+          ctx.lineWidth = edge * 2;
+          ctx.strokeRect(left, top, len, len);
         }
         ctx.drawImage(image, edge, edge, len, len, left, top, len, len);
       }
