@@ -18,6 +18,7 @@ export function render(
   const canvas = getCanvas(container, screen);
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // { [key: number]: Square } にリマップ
   const indexSquareMap: { [key: number]: t.Square | undefined } = {};
@@ -35,8 +36,6 @@ export function render(
   if (pattern) {
     ctx.fillStyle = pattern;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-  } else {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
   if (debug) {
     ctx.fillStyle = 'white';
