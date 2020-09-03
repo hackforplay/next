@@ -29,13 +29,15 @@ export function render(
   const front = tables && tables[0];
   const row = front && front.length;
   const column = front && front[0] && front[0].length;
+  const width = Math.min(canvas.width, column * size);
+  const height = Math.min(canvas.height, row * size);
 
   // とりあえず全部同じように描画
   const baseImage = preloader && preloader.getImage(base);
   const pattern = baseImage && ctx.createPattern(baseImage, 'repeat');
   if (pattern) {
     ctx.fillStyle = pattern;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, width, height);
   }
   if (debug) {
     ctx.fillStyle = 'white';
