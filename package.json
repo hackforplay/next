@@ -58,6 +58,7 @@
     "lib": "lib"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.161",
     "@types/lodash-es": "^4.17.3",
     "@types/node": "^12.6.8",
     "lodash-es": "^4.17.14"
