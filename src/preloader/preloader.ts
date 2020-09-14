@@ -1,3 +1,4 @@
+import { Once } from '../utils/once';
 import { onOnline } from './onOnline';
 
 export class Preloader {
@@ -9,10 +10,10 @@ export class Preloader {
    * 現在ロード中のリソースの数を表す整数値
    */
   private count = 0;
-
   public get loading() {
     return this.count > 0;
   }
+  private once = new Once();
 
   loadImage(index: number, src: string, defaultView: Window | null) {
     const current = this.store[index];
@@ -24,10 +25,12 @@ export class Preloader {
     img.onload = () => {
       this.store[index] = img;
       this.count--;
+      this.checkSubscriber();
     };
     img.onerror = () => {
       console.error('Image load error: ' + src);
       this.count--;
+      this.checkSubscriber();
       // オンラインになったら再ロードする
       onOnline(defaultView, () => {
         this.loadImage(index, src, defaultView);
@@ -38,5 +41,16 @@ export class Preloader {
   }
   getImage(index: number) {
     return this.store[index] || null;
+  }
+
+  subscribe(callback: Function) {
+    this.once.add(callback);
+  }
+
+  private checkSubscriber() {
+    if (this.count > 0) {
+      return;
+    }
+    this.once.emit();
   }
 }

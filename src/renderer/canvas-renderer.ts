@@ -1,4 +1,3 @@
-import { debounce } from 'lodash-es';
 import { Preloader } from '../preloader/preloader';
 import { Scene, SceneScreen, Square } from '../types';
 import { render } from './render';
@@ -13,8 +12,6 @@ export class CanvasRenderer {
   readonly canvas: HTMLCanvasElement;
   readonly screen: SceneScreen;
   readonly preloader = new Preloader();
-
-  private resolves: Function[] = [];
 
   update(scene: Scene): Promise<void> {
     const {
@@ -45,28 +42,18 @@ export class CanvasRenderer {
     }
 
     if (!this.preloader.loading) {
-      this.postRender.cancel();
       this.render(scene);
       return Promise.resolve();
     }
     return new Promise(resolve => {
-      this.resolves.push(resolve);
-      this.postRender(scene);
+      this.preloader.subscribe(() => {
+        this.render(scene);
+        resolve();
+      });
     });
   }
 
-  postRender = debounce((scene: Scene) => {
-    if (this.preloader.loading) {
-      this.postRender(scene);
-    } else {
-      this.render(scene);
-    }
-  }, 50);
-
   render(scene: Scene) {
     render(scene, this.container, this.preloader);
-    for (const resolve of this.resolves) {
-      resolve();
-    }
   }
 }
