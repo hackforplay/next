@@ -20,6 +20,7 @@ export class CanvasRenderer {
     const {
       map: { base, tables, squares }
     } = scene;
+    const window = this.container.ownerDocument.defaultView;
 
     // { [key: number]: Square } にリマップ
     const indexSquareMap: { [key: number]: Square | undefined } = {};
@@ -29,7 +30,7 @@ export class CanvasRenderer {
 
     const baseSquare = indexSquareMap[base];
     if (baseSquare) {
-      this.preloader.loadImage(base, baseSquare.tile.image.src);
+      this.preloader.loadImage(base, baseSquare.tile.image.src, window);
     }
 
     for (const table of tables) {
@@ -37,7 +38,7 @@ export class CanvasRenderer {
         for (const index of row.values()) {
           const square = indexSquareMap[index];
           if (square) {
-            this.preloader.loadImage(index, square.tile.image.src);
+            this.preloader.loadImage(index, square.tile.image.src, window);
           }
         }
       }
