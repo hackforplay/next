@@ -33,6 +33,7 @@ export class Preloader {
       this.checkSubscriber();
       // オンラインになったら再ロードする
       onOnline(defaultView, () => {
+        this.store[index] = undefined;
         this.loadImage(index, src, defaultView);
       });
     };
