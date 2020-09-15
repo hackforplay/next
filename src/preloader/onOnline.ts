@@ -8,7 +8,7 @@ let registered = false;
  */
 export function onOnline(defaultView: Window | null, callback: Function) {
   once.add(callback);
-  if (!registered || !defaultView) return;
+  if (registered || !defaultView) return;
   defaultView.addEventListener('online', () => {
     once.emit();
   });
